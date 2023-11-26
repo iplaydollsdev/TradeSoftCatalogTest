@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace TradeSoftCatalogTest.MVVM.Model
 {
-    public class AnalogChain
+    public class AnalogRoute
     {
-        public string AtricleFrom {  get; set; }
-        public string AtricleTo { get; set; }
+        public List<AnalogChain> Chains { get; set; } = new();
     }
 }

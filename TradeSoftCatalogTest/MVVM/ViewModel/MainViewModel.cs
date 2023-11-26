@@ -17,7 +17,9 @@ namespace TradeSoftCatalogTest.MVVM.ViewModel
         public ObservableCollection<AnalogModel> AnalogModels { get; set; } = new();
         public ICommand ShowAddWindowCommand { get; set; }
         public ICommand ShowEditWindowCommand { get; set; }
+        public ICommand ShowFindWindowCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        
 
         public MainViewModel()
         {
@@ -25,7 +27,19 @@ namespace TradeSoftCatalogTest.MVVM.ViewModel
 
             ShowAddWindowCommand = new RelayCommand(ShowAddWindow, CanShowAddWindow);
             ShowEditWindowCommand = new RelayCommand(ShowEditWindow, CanShowEditwindow);
+            ShowFindWindowCommand = new RelayCommand(ShowFindWindow, CanShowFindWindow);
             DeleteCommand = new RelayCommand(DeleteCommandExecute, CanDeleteCommandExecute);
+        }
+
+        private bool CanShowFindWindow(object arg)
+        {
+            return true;
+        }
+
+        private void ShowFindWindow(object obj)
+        {
+            FindAnalog findAnalogWindow = new();
+            findAnalogWindow.ShowDialog();
         }
 
         private bool CanShowAddWindow(object parameter)

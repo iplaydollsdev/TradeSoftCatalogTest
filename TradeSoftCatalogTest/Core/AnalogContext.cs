@@ -9,6 +9,7 @@ public class AnalogContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+
         string connectionString = ConfigurationManager.ConnectionStrings["AnalogContext"].ConnectionString;
         optionsBuilder.UseSqlServer(connectionString);
     }

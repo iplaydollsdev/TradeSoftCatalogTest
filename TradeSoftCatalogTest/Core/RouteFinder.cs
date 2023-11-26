@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TradeSoftCatalogTest.MVVM.Model;
 
 namespace TradeSoftCatalogTest.Core
@@ -22,25 +23,45 @@ namespace TradeSoftCatalogTest.Core
         /// <returns>Список маршрутов до исходного товара</returns>
         public static List<AnalogRoute> Find(string inputFrom, string inputTo, int recursionSteps)
         {
-            // Разделяем введенную строну по разделителю "/"
-            string[] partsFrom = inputFrom.Split('/');
-            // Определяем исходный артикул
-            string articleFrom = partsFrom[0];
-            // Определяем исходного производителя
-            string manufacturerFrom = partsFrom.ElementAtOrDefault(1);
+            try
+            {
+                if (string.IsNullOrEmpty(inputFrom) || string.IsNullOrEmpty(inputTo))
+                {
+                    MessageBox.Show("Поля не должны быть пустыми");
+                    throw new Exception();
+                }
 
-            //То же для искомого товара
-            string[] partsTo = inputTo.Split('/');
-            string articleTo = partsTo[0];
-            string manufacturerTo = partsTo.ElementAtOrDefault(1);
+                // Разделяем введенную строну по разделителю "/"
+                string[] partsFrom = inputFrom.Split('/');
+                // Определяем исходный артикул
+                string articleFrom = partsFrom[0];
+                // Определяем исходного производителя
+                string manufacturerFrom = partsFrom.ElementAtOrDefault(1);
 
-            // Инициализируем список маршрутов
-            List<AnalogRoute> result = new();
-            // Инициализируем HashSet для того, чтобы отслеживать и избегать цепочки, в которых уже были
-            HashSet<string> keys = new HashSet<string>();
-            // Запускаем рекурсивный метод поиска
-            FindRoutes(articleFrom, manufacturerFrom, articleTo, manufacturerTo, recursionSteps, new List<AnalogChain>(), result, keys);
-            return result;
+
+                //То же для искомого товара
+                string[] partsTo = inputTo.Split('/');
+                string articleTo = partsTo[0];
+                string manufacturerTo = partsTo.ElementAtOrDefault(1);
+
+                if (partsFrom.Length != 2 || partsTo.Length != 2)
+                {
+                    MessageBox.Show("Формат поиска \"Артикул/Производитель\"");
+                    throw new Exception();
+                }
+
+                // Инициализируем список маршрутов
+                List<AnalogRoute> result = new();
+                // Инициализируем HashSet для того, чтобы отслеживать и избегать цепочки, в которых уже были
+                HashSet<string> keys = new HashSet<string>();
+                // Запускаем рекурсивный метод поиска
+                FindRoutes(articleFrom, manufacturerFrom, articleTo, manufacturerTo, recursionSteps, new List<AnalogChain>(), result, keys);
+                return result;
+            }
+            catch
+            {
+                throw;
+            }
         }
         /// <summary>
         /// Рекурсивный метод поиска, который вызывывается до глубины рекурсии для каждого артикула
@@ -64,8 +85,8 @@ namespace TradeSoftCatalogTest.Core
             // Если исхомый и исходный товар совпадает выходит из текущей рекурсии
             if (articleFrom == articleTo && (manufacturerFrom == null || manufacturerFrom == manufacturerTo))
             {
-                result.Add(new AnalogRoute { Chains = new List<AnalogChain>(currentRoute) });
-                return;
+                MessageBox.Show("Исходный и искомый товары не должны совпадать");
+                throw new Exception();
             }
 
             // Формируется ключ текущей цепочки для HashSet

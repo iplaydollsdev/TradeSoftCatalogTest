@@ -42,15 +42,22 @@ namespace TradeSoftCatalogTest.MVVM.ViewModel
         /// <param name="obj"></param>
         private void FindCommandExecute(object obj)
         {
-            var result = RouteFinder.Find(ArticleFrom, ArticleTo, RecursionSteps);
-            if (result.Count > 0)
+            try
             {
-                Route routeWindow = new(result);
-                routeWindow.ShowDialog();
+                var result = RouteFinder.Find(ArticleFrom, ArticleTo, RecursionSteps);
+                if (result != null && result.Count > 0)
+                {
+                    Route routeWindow = new(result);
+                    routeWindow.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show($"Искомый товар с артикулом {ArticleTo} не найден за {RecursionSteps} шагов");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show($"Искомый товар с артикулом {ArticleTo} не найден за {RecursionSteps} шагов");
+                Console.WriteLine(ex.Message);
             }
         }
 

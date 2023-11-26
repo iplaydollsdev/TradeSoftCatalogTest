@@ -55,22 +55,31 @@ namespace TradeSoftCatalogTest.MVVM.ViewModel
         /// <param name="parameter"></param>
         private async void AddCommandExecute(object parameter)
         {
-            using (var context = new AnalogContext())
+            try
             {
-                var analogModel = new AnalogModel() {
-                    Article1 = this.Article1, 
-                    Manufacturer1 = this.Manufacturer1, 
-                    Article2 = this.Article2, 
-                    Manufacturer2 = this.Manufacturer2, 
-                    TrustLevel = this.TrustLevel
-                };
+                using (var context = new AnalogContext())
+                {
+                    var analogModel = new AnalogModel() {
+                        Article1 = this.Article1, 
+                        Manufacturer1 = this.Manufacturer1, 
+                        Article2 = this.Article2, 
+                        Manufacturer2 = this.Manufacturer2, 
+                        TrustLevel = this.TrustLevel
+                    };
 
-                context.AnalogModels.Add(analogModel);
-                AnalogModelsToUpdate.Add(analogModel);
-                await context.SaveChangesAsync();
+                    context.AnalogModels.Add(analogModel);
+                    await context.SaveChangesAsync();
+                    AnalogModelsToUpdate.Add(analogModel);
+                }
             }
-
-            CloseWindow();
+            catch
+            {
+                MessageBox.Show("Не удалось добавить товар");
+            }
+            finally 
+            { 
+                CloseWindow(); 
+            }
         }
         private void CloseWindow()
         {

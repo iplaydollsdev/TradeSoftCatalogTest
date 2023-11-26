@@ -71,13 +71,20 @@ namespace TradeSoftCatalogTest.MVVM.ViewModel
 
         private void GetAnalogModels()
         {
-            using (var context = new AnalogContext())
+            try
             {
-                var models = context.AnalogModels.ToList();
-                foreach (var model in models)
+                using (var context = new AnalogContext())
                 {
-                    AnalogModels.Add(model);
+                    var models = context.AnalogModels.ToList();
+                    foreach (var model in models)
+                    {
+                        AnalogModels.Add(model);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
         }
 

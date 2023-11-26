@@ -13,6 +13,9 @@ using TradeSoftCatalogTest.MVVM.View;
 
 namespace TradeSoftCatalogTest.MVVM.ViewModel
 {
+    /// <summary>
+    /// Представление логики для окна AddAnalog
+    /// </summary>
     public class AddAnalogViewModel
     {
         public ICommand AddAnalogCommand { get; set; }
@@ -46,6 +49,10 @@ namespace TradeSoftCatalogTest.MVVM.ViewModel
         {
             return true;
         }
+        /// <summary>
+        /// Добавление нового аналога в базу данных и коллекцию в MainWindow
+        /// </summary>
+        /// <param name="parameter"></param>
         private async void AddCommandExecute(object parameter)
         {
             using (var context = new AnalogContext())

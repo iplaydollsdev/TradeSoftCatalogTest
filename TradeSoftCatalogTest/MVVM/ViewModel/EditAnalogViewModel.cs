@@ -11,6 +11,9 @@ using TradeSoftCatalogTest.MVVM.View;
 
 namespace TradeSoftCatalogTest.MVVM.ViewModel
 {
+    /// <summary>
+    /// Представление логики для окна EditAnalog
+    /// </summary>
     public class EditAnalogViewModel
     {
         public ICommand EditAnalogCommand { get; set; }
@@ -53,6 +56,10 @@ namespace TradeSoftCatalogTest.MVVM.ViewModel
             return true;
         }
 
+        /// <summary>
+        /// Изменяет данные в базе данных и коллекции в MainWindow на измененные
+        /// </summary>
+        /// <param name="parameter"></param>
         private async void EditCommandExecute(object parameter)
         {
             using (var context = new AnalogContext())

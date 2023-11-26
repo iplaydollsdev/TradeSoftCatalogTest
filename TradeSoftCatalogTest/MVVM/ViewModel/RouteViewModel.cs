@@ -8,6 +8,9 @@ using TradeSoftCatalogTest.MVVM.Model;
 
 namespace TradeSoftCatalogTest.MVVM.ViewModel
 {
+    /// <summary>
+    /// Представление логики для окна Route
+    /// </summary>
     public class RouteViewModel : INotifyPropertyChanged
     {
         public List<AnalogRoute> Routes { get; set; } = new();

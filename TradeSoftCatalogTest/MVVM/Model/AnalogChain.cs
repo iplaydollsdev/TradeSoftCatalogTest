@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TradeSoftCatalogTest.MVVM.Model
 {
+    /// <summary>
+    /// Представление связи одного товара с другим
+    /// </summary>
     public class AnalogChain
     {
         public string AtricleFrom {  get; set; }

@@ -12,6 +12,9 @@ using TradeSoftCatalogTest.MVVM.View;
 
 namespace TradeSoftCatalogTest.MVVM.ViewModel
 {
+    /// <summary>
+    /// Представление логики для окна MainWindow
+    /// </summary>
     public class MainViewModel
     {
         public ObservableCollection<AnalogModel> AnalogModels { get; set; } = new();
@@ -80,7 +83,6 @@ namespace TradeSoftCatalogTest.MVVM.ViewModel
 
         private bool CanDeleteCommandExecute(object parameter)
         {
-            // Ваша логика проверки возможности удаления
             return true;
         }
 

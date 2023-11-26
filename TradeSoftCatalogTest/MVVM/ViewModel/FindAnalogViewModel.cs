@@ -12,6 +12,9 @@ using TradeSoftCatalogTest.MVVM.View;
 
 namespace TradeSoftCatalogTest.MVVM.ViewModel
 {
+    /// <summary>
+    /// Представление логики для окна FindAnalog
+    /// </summary>
     public class FindAnalogViewModel : INotifyPropertyChanged
     {
         public string ArticleFrom { get; set; }
@@ -33,6 +36,10 @@ namespace TradeSoftCatalogTest.MVVM.ViewModel
             return true;
         }
 
+        /// <summary>
+        /// Проивзодит поиск аналога с помощью класса RouteFinder
+        /// </summary>
+        /// <param name="obj"></param>
         private void FindCommandExecute(object obj)
         {
             var result = RouteFinder.Find(ArticleFrom, ArticleTo, RecursionSteps);

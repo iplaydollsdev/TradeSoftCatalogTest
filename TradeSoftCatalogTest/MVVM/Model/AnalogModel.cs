@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace TradeSoftCatalogTest.MVVM.Model
 {
+    /// <summary>
+    /// Представление аналога в базе данных
+    /// </summary>
     public class AnalogModel : INotifyPropertyChanged
     {
         private int _id;
